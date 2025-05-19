@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6e3cbc, #48b1f5);
+        color: #fff;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .login-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 16px;
+        width: 400px;
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.6s ease;
+    }
+
+    .login-card h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #fff;
+    }
+
+    .login-card form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .login-card label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #ddd;
+    }
+
+    .login-card input {
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    .login-card input:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .login-card button {
+        padding: 0.8rem;
+        background-color: #48b1f5;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #fff;
+        transition: background-color 0.3s;
+    }
+
+    .login-card button:hover {
+        background-color: #6e3cbc;
+    }
+
+    .login-card a {
+        text-align: center;
+        color: #fff;
+        font-size: 0.9rem;
+        text-decoration: none;
+        display: block;
+        margin-top: 1rem;
+        transition: color 0.3s;
+    }
+
+    .login-card a:hover {
+        color: #48b1f5;
+    }
+</style>
+
+<div class="container">
+    <div class="login-card">
+        <h2>Login</h2>
+        <form method="POST">
+            <label>Username:</label>
+            <input type="text" name="username" required>
+            <label>Password:</label>
+            <input type="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <a href="{{ url_for('auth.register') }}">Don't have an account? Register here.</a>
+    </div>
+</div>
+{% endblock %}

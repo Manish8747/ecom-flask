@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            margin-bottom: 3;  /* removed bottom margin */
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        form {
+            margin: 0; /* remove default form margin */
+        }
+
+        .logout-btn {
+            background-color: #ff5e57;
+            color: #fff;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #ff3b30;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="dashboard-title">Product Dashboard</h1>
+
+    <form action="{{ url_for('logout') }}" method="POST">
+        <button class="logout-btn" type="submit">Logout</button>
+    </form>
+</div>
+
+</body>
+</html>

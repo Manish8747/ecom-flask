@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flask E-commerce</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <header style="background:#48b1f5; padding:1rem; color:#fff; text-align:center; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <h1>E-commerce App</h1>
+    </header>
+    
+    <main style="max-width: 960px; margin: 2rem auto; padding: 0 1rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+        <section>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </section>
+    
+        <section>
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+</body>
+</html>
