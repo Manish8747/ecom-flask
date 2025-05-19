@@ -1,0 +1,33 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment folder
+env/
+venv/
+.venv/
+
+# Environment variables
+*.env
+
+# Database files
+*.sqlite3
+*.db
+
+# Logs
+*.log
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE specific
+.vscode/
+*.swp
+*.swo
+
+# MacOS specific
+.DS_Store
