@@ -1,7 +1,3 @@
-Here is a professional `README.md` file for your Flask-based e-commerce-like teaching project. It includes setup instructions, project features, folder structure, and basic usage.
-
----
-
 ```markdown
 # 🛒 Flask E-Commerce Learning Project
 

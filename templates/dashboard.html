@@ -1,172 +1,183 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Dashboard</title>
     <style>
-        /* Background and font */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6e3cbc, #48b1f5);
-            color: #fff;
-        }
+      /* Background and font */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6e3cbc, #48b1f5);
+        color: #fff;
+      }
 
-        .dashboard-container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+      .dashboard-container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
 
-        /* Top actions container: Add product left, logout right */
-        .top-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
+      /* Top actions container: Add product left, logout right */
+      .top-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
 
-        .top-actions a,
-        .top-actions form button {
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            background-color: #48b1f5;
-            color: #fff;
-            font-weight: 600;
-            border: none;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
+      .top-actions a,
+      .top-actions form button {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        background-color: #48b1f5;
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-        .top-actions a:hover,
-        .top-actions form button:hover {
-            background-color: #6e3cbc;
-        }
+      .top-actions a:hover,
+      .top-actions form button:hover {
+        background-color: #6e3cbc;
+      }
 
-        .top-actions form {
-            margin: 0;
-        }
+      .top-actions form {
+        margin: 0;
+      }
 
-        /* Products grid aligned left */
-        .products-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: flex-start;
-        }
+      /* Products grid aligned left */
+      .products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: flex-start;
+      }
 
-        /* Product card */
-        .product-card {
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            width: 220px;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+      /* Product card */
+      .product-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        width: 220px;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-        /* Hover animation */
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
+      /* Hover animation */
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      }
 
-        /* Image container */
-        .product-image {
-            width: 100%;
-            height: 140px;
-            overflow: hidden;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            flex-shrink: 0;
-        }
+      /* Image container */
+      .product-image {
+        width: 100%;
+        height: 140px;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+      }
 
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* ensures image covers the container without distortion */
-            display: block;
-            border-radius: 8px;
-        }
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* ensures image covers the container without distortion */
+        display: block;
+        border-radius: 8px;
+      }
 
-        /* Product info */
-        .product-name {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: #fff;
-        }
+      /* Product info */
+      .product-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.4rem;
+        color: #fff;
+      }
 
-        .product-description {
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-            color: #ddd;
-            flex-grow: 1;
-        }
+      .product-description {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+        color: #ddd;
+        flex-grow: 1;
+      }
 
-        .product-price {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #48b1f5;
-        }
+      .product-price {
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #48b1f5;
+      }
 
-        /* Action buttons */
-        .product-actions {
-            display: flex;
-            justify-content: space-between;
-        }
+      /* Action buttons */
+      .product-actions {
+        display: flex;
+        justify-content: space-between;
+      }
 
-        .product-actions a {
-            background-color: #48b1f5;
-            padding: 0.5rem 0.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            color: white;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-        }
+      .product-actions a {
+        background-color: #48b1f5;
+        padding: 0.5rem 0.8rem;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
 
-        .product-actions a:hover {
-            background-color: #6e3cbc;
-        }
+      .product-actions a:hover {
+        background-color: #6e3cbc;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="dashboard-container">
-        <div class="top-actions">
-            <a href="{{ url_for('add_product') }}">Add New Product</a>
-            <form action="{{ url_for('logout') }}" method="post">
-                <button type="submit">Logout</button>
-            </form>
-        </div>
+      <div class="top-actions">
+        <a href="{{ url_for('add_product') }}">Add New Product</a>
+        <form action="{{ url_for('logout') }}" method="post">
+          <button type="submit">Logout</button>
+        </form>
+      </div>
 
-        <h2>Product List</h2>
+      <h2>Product List</h2>
 
-        <div class="products-grid">
-            {% for product in products %}
-            <div class="product-card">
-                <div class="product-image">
-                    {% if product.image %}
-                    <img src="{{ url_for('uploaded_file', filename=product.image) }}" alt="{{ product.name }}">
-                    {% else %}
-                    <img src="https://via.placeholder.com/220x140?text=No+Image" alt="No Image">
-                    {% endif %}
-                </div>
-                <div class="product-name">{{ product.name }}</div>
-                <div class="product-description">{{ product.description }}</div>
-                <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
-                <div class="product-actions">
-                    <a href="{{ url_for('edit_product', id=product.id) }}">Edit</a>
-                    <a href="{{ url_for('delete_product', id=product.id) }}" onclick="return confirm('Are you sure?')">Delete</a>
-                </div>
-            </div>
-            {% endfor %}
+      <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+          <div class="product-image">
+            {% if product.image %}
+            <img
+              src="{{ url_for('uploaded_file', filename=product.image) }}"
+              alt="{{ product.name }}"
+            />
+            {% else %}
+            <img
+              src="https://via.placeholder.com/220x140?text=No+Image"
+              alt="No Image"
+            />
+            {% endif %}
+          </div>
+          <div class="product-name">{{ product.name }}</div>
+          <div class="product-description">{{ product.description }}</div>
+          <div class="product-price">${{ "%.2f"|format(product.price) }}</div>
+          <div class="product-actions">
+            <a href="{{ url_for('edit_product', id=product.id) }}">Edit</a>
+            <a
+              href="{{ url_for('delete_product', id=product.id) }}"
+              onclick="return confirm('Are you sure?')"
+              >Delete</a
+            >
+          </div>
         </div>
+        {% endfor %}
+      </div>
     </div>
-</body>
+  </body>
 </html>
