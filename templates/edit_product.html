@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Edit Product</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6e3cbc, #48b1f5);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        /* Instead of center vertically, use start and padding */
+        align-items: flex-start;
+        padding: 3rem 0; /* Space top and bottom */
+        box-sizing: border-box;
+        min-height: 100vh;
+      }
+
+      .form-container {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1rem 1.2rem;
+        border-radius: 10px;
+        width: 300px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+        animation: fadeIn 0.6s ease;
+      }
+
+      h2 {
+        text-align: center;
+        margin: 0 0 0.8rem 0;
+        font-size: 1.3rem;
+        color: #fff;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+        font-size: 0.85rem;
+        color: #ddd;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      textarea,
+      input[type="file"] {
+        padding: 0.3rem 0.4rem;
+        margin-bottom: 0.6rem;
+        border-radius: 5px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 0.85rem;
+        resize: vertical;
+        line-height: 1.1;
+        transition: background-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus,
+      textarea:focus,
+      input[type="file"]:focus {
+        outline: none;
+        background-color: rgba(255, 255, 255, 0.35);
+      }
+
+      textarea {
+        min-height: 50px;
+        max-height: 80px;
+      }
+
+      img {
+        border-radius: 6px;
+        margin-bottom: 0.6rem;
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      button {
+        padding: 0.55rem;
+        border-radius: 5px;
+        border: none;
+        background-color: #48b1f5;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #6e3cbc;
+      }
+
+      .back-link {
+        display: block;
+        margin-top: 0.9rem;
+        text-align: center;
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .back-link:hover {
+        color: #48b1f5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Edit Product</h2>
+      <form method="POST" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="{{ product.name }}"
+          required
+        />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">
+{{ product.description }}</textarea
+        >
+
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          step="0.01"
+          name="price"
+          value="{{ product.price }}"
+          required
+        />
+
+        <label for="image">Image:</label>
+        {% if product.image %}
+        <img
+          src="{{ url_for('uploaded_file', filename=product.image) }}"
+          alt="Product Image"
+        />
+        {% endif %}
+        <input type="file" id="image" name="image" />
+
+        <button type="submit">Update Product</button>
+      </form>
+      <a href="{{ url_for('product_list') }}" class="back-link"
+        >← Back to Product List</a
+      >
+    </div>
+  </body>
+</html>
