@@ -46,7 +46,6 @@ def login():
         # Store JWT token in session
         session['access_token'] = access_token
 
-        flash(f"Welcome {username}!", "success")
         return redirect(url_for('home'))
 
     return render_template('auth/login.html')
@@ -56,3 +55,11 @@ def logout():
     session.pop('access_token', None)
     flash("Logged out successfully!", "success")
     return redirect(url_for('auth.login'))
+
+from flask import render_template
+from models import User  # make sure the path is correct
+
+@auth_bp.route('/users')
+def view_users():
+    users = User.query.all()
+    return render_template('users.html', users=users)
