@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *.pyo
 
+uploads/
+
+Project_Introduction.pdf
+
 ecom_flask/
 
 # Virtual environment folder
