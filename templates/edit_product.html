@@ -13,9 +13,8 @@
         color: #fff;
         display: flex;
         justify-content: center;
-        /* Instead of center vertically, use start and padding */
         align-items: flex-start;
-        padding: 3rem 0; /* Space top and bottom */
+        padding: 3rem 0;
         box-sizing: border-box;
         min-height: 100vh;
       }
@@ -132,9 +131,7 @@
         />
 
         <label for="description">Description:</label>
-        <textarea id="description" name="description">
-{{ product.description }}</textarea
-        >
+        <textarea id="description" name="description">{{ product.description }}</textarea>
 
         <label for="price">Price:</label>
         <input
@@ -157,9 +154,8 @@
 
         <button type="submit">Update Product</button>
       </form>
-      <a href="{{ url_for('product_list') }}" class="back-link"
-        >← Back to Product List</a
-      >
+      <!-- Updated URL for blueprint -->
+      <a href="{{ url_for('products.product_list') }}" class="back-link">← Back to Product List</a>
     </div>
   </body>
 </html>

@@ -1,4 +1,4 @@
-```markdown
+````markdown
 # 🛒 Flask E-Commerce Learning Project
 
 This is a simplified **e-commerce-style web application** built using **Flask and Python**. It is designed for educational purposes to teach students the fundamentals of web development including:
@@ -14,32 +14,6 @@ This is a simplified **e-commerce-style web application** built using **Flask an
 > ⚙️ This project is built using **only Flask and Python**, making it perfect for beginners.
 
 ---
-
-## 📁 Project Structure
-```
-
-e_commerce/
-├── app.py # Main application entry point
-├── config.py # Environment variable loader
-├── .env # Secret keys and environment configs
-├── .gitignore # Ignore unnecessary files like virtual env, .env, etc.
-├── requirements.txt # Python dependencies
-├── auth.py # Auth routes (register/login)
-├── products.py # Placeholder for product logic
-├── cart.py # Placeholder for cart logic
-├── orders.py # Placeholder for orders logic
-├── models.py # In-memory user data
-├── utils.py # Placeholder for helper functions
-├── static/ # CSS or JS assets
-│ └── css/
-│ └── styles.css
-└── templates/ # HTML templates
-├── base.html
-└── auth/
-├── register.html
-└── login.html
-
-````
 
 ---
 
@@ -62,6 +36,7 @@ e_commerce/
 ```bash
 git clone https://github.com/your-username/e_commerce.git
 cd e_commerce
+```
 ````
 
 ### 2. Create Virtual Environment and Activate
@@ -106,16 +81,8 @@ Then go to: [http://127.0.0.1:5000/auth/register](http://127.0.0.1:5000/auth/reg
 - Manage state using sessions and cookies (in later stages)
 - Apply secure coding with secrets stored in `.env`
 - Build a scalable structure for future additions
-
----
-
-## 🔮 Future Additions (Covered in Later Days)
-
-- JWT Authentication
-- Product listing & cart functionality
-- Order management
-- Role-based access
-- Persistent database integration
+- Login and Registration using JWT Authentication
+- Products management using database
 
 ---
 
@@ -128,7 +95,6 @@ This project is for educational purposes only. Use it freely in your classrooms 
 ## 🙋‍♂️ Author
 
 **Instructor:** \[Amogh Pathak]
-**LinkedIn:** [linkedin.com/in/yourname](https://linkedin.com/in/yourname)
 
 ```
 
