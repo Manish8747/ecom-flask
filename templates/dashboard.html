@@ -1,175 +1,156 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Dashboard</title>
+    <title>Product Dashboard</title>
     <style>
-      /* Background and font */
-      body,
-      html {
+      body {
         margin: 0;
-        padding: 0;
-        height: 100%;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         background: linear-gradient(135deg, #6e3cbc, #48b1f5);
         color: #fff;
+        padding: 2rem;
       }
 
       .dashboard-container {
-        max-width: 900px;
-        margin: 2rem auto;
-        padding: 0 1rem;
+        max-width: 1100px;
+        margin: auto;
       }
 
       .top-actions {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
       }
 
-      .top-actions a,
-      .top-actions form button {
-        padding: 0.6rem 1.2rem;
-        border-radius: 8px;
+      .top-actions a {
+        padding: 0.5rem 1rem;
         background-color: #48b1f5;
-        color: #fff;
-        font-weight: 600;
-        border: none;
+        color: white;
         text-decoration: none;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
+        border-radius: 6px;
+        font-weight: bold;
       }
 
-      .top-actions a:hover,
-      .top-actions form button:hover {
+      .top-actions a:hover {
         background-color: #6e3cbc;
       }
 
-      .top-actions form {
-        margin: 0;
-      }
-
-      .products-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: flex-start;
+      .product-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1rem;
       }
 
       .product-card {
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(8px);
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        width: 160px;
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(5px);
+        padding: 0.8rem;
+        border-radius: 8px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transition: transform 0.2s ease;
       }
 
       .product-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
       }
 
-      .product-image {
-        width: 100%;
-        height: 140px;
-        overflow: hidden;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-        flex-shrink: 0;
-      }
-
-      .product-image img {
-        width: 100%;
-        height: 100%;
+      .product-card img {
+        max-width: 100%;
+        height: 130px;
         object-fit: cover;
-        display: block;
-        border-radius: 8px;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
       }
 
-      .product-name {
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin-bottom: 0.4rem;
-        color: #fff;
+      .product-card h3 {
+        margin: 0.3rem 0;
+        font-size: 1rem;
       }
 
-      .product-description {
+      .product-card p {
+        font-size: 0.8rem;
+        color: #e0e0e0;
+        margin: 0.2rem 0;
+      }
+
+      .product-card .price {
         font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-        color: #ddd;
-        flex-grow: 1;
-      }
-
-      .product-price {
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #48b1f5;
+        font-weight: bold;
+        color: #fff;
+        margin-top: 0.2rem;
       }
 
       .product-actions {
+        margin-top: 0.5rem;
         display: flex;
-        justify-content: space-between;
+        flex-direction: column;
+        gap: 0.3rem;
       }
 
       .product-actions a {
-        background-color: #48b1f5;
-        padding: 0.5rem 0.8rem;
-        border-radius: 8px;
+        background: #48b1f5;
+        padding: 0.3rem;
         text-decoration: none;
         color: white;
-        font-weight: 600;
-        transition: background-color 0.3s ease;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        transition: background 0.3s;
       }
 
       .product-actions a:hover {
-        background-color: #6e3cbc;
+        background: #6e3cbc;
+      }
+
+      .flash-message {
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 0.6rem;
+        margin-bottom: 1rem;
+        border-radius: 6px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <div class="dashboard-container">
       <div class="top-actions">
-        <!-- Correct blueprint reference -->
-        <a href="{{ url_for('products.add_product') }}">Add New Product</a>
-
-        <!-- Assuming logout is part of main app, not blueprint -->
-        <form action="{{ url_for('logout') }}" method="post">
-          <button type="submit">Logout</button>
-        </form>
+        <a href="{{ url_for('products.add_product') }}">➕ Add Product</a>
+        <a href="{{ url_for('cart.view_cart') }}">
+          🛒 View Cart {% if cart_count > 0 %}({{ cart_count }}){% endif %}
+        </a>
       </div>
 
-      <h2>Product List</h2>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="flash-message">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
 
-      <div class="products-grid">
+      <div class="product-list">
         {% for product in products %}
         <div class="product-card">
-          <div class="product-image">
-            {% if product.image %}
-            <img
-              src="{{ url_for('uploaded_file', filename=product.image) }}"
-              alt="{{ product.name }}"
-            />
-            {% else %}
-            <img
-              src="https://via.placeholder.com/220x140?text=No+Image"
-              alt="No Image"
-            />
-            {% endif %}
-          </div>
-          <div class="product-name">{{ product.name }}</div>
-          <div class="product-description">{{ product.description }}</div>
-          <div class="product-price">INR {{ "%.2f"|format(product.price) }}</div>
+          {% if product.image %}
+          <img
+            src="{{ url_for('uploaded_file', filename=product.image) }}"
+            alt="Product Image"
+          />
+          {% endif %}
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <p class="price">₹{{ product.price }}</p>
           <div class="product-actions">
-            <!-- Blueprint-aware URLs for edit/delete -->
-            <a href="{{ url_for('products.edit_product', id=product.id) }}">Edit</a>
+            <a href="{{ url_for('products.edit_product', id=product.id) }}"
+              >✏️ Edit</a
+            >
             <a
               href="{{ url_for('products.delete_product', id=product.id) }}"
               onclick="return confirm('Are you sure?')"
-              >Delete</a
+              >🗑️ Delete</a
+            >
+            <a href="{{ url_for('cart.add_to_cart', product_id=product.id) }}"
+              >🛒 Add to Cart</a
             >
           </div>
         </div>

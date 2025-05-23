@@ -52,5 +52,12 @@ def delete_product(id):
 
 @products_bp.route('/products')
 def product_list():
+    if 'access_token' not in session:
+        return redirect(url_for('auth.login'))
+
     products = Product.query.all()
-    return render_template('dashboard.html', products=products)
+    # Calculate cart count from session
+    cart = session.get('cart', {})
+    cart_count = sum(cart.values())
+
+    return render_template('dashboard.html', products=products, cart_count=cart_count)
