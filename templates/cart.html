@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Cart</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #6e3cbc, #48b1f5);
+      color: #fff;
+      padding: 2rem;
+    }
+    .cart-container {
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 12px;
+    }
+    .item {
+      border-bottom: 1px solid #ccc;
+      padding: 0.5rem 0;
+    }
+    .item:last-child {
+      border-bottom: none;
+    }
+    .item h3 {
+      margin: 0;
+    }
+    .cart-total {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+    .actions a {
+      padding: 0.4rem 0.8rem;
+      background: #48b1f5;
+      border-radius: 6px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      margin-right: 10px;
+    }
+    .actions a:hover {
+      background: #6e3cbc;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h2>Your Cart</h2>
+    {% if items %}
+      {% for item in items %}
+        <div class="item">
+          <h3>{{ item.product.name }} (x{{ item.quantity }})</h3>
+          <p>Price: ₹{{ item.product.price }} | Subtotal: ₹{{ item.subtotal }}</p>
+          <div class="actions">
+            <a href="{{ url_for('cart.remove_from_cart', product_id=item.product.id) }}">Remove</a>
+          </div>
+        </div>
+      {% endfor %}
+      <p class="cart-total">Total: ₹{{ total }}</p>
+      <div class="actions">
+        <a href="{{ url_for('cart.checkout') }}">Proceed to Checkout</a>
+        <a href="{{ url_for('products.product_list') }}">← Continue Shopping</a>
+      </div>
+    {% else %}
+      <p>Your cart is empty.</p>
+      <a href="{{ url_for('products.product_list') }}">← Continue Shopping</a>
+    {% endif %}
+  </div>
+</body>
+</html>
